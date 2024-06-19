@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Buscador por palabra clave</h1>
+    <form method="GET">{%csrf_token%}
+        <input type="text" id="keyword" name="keyword" placeholder="Ingrese nombre aquí">
+        <button type="submit"> Buscar</button>
+    </form>
+
+    <h3>Lista de resultados</h3>
+    <ul>
+        <li>
+            {% for e in empleados %}
+            {{e}}
+            {% endfor %}
+        </li>
+
+    </ul>
+</body>
+
+</html>
