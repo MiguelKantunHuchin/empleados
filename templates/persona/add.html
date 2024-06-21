@@ -1,21 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
 
-<body>
-    <h1>Agregar empleado</h1>
+{% block title %}
+Añadir Empleados
+{% endblock title %}
 
-    <form method="POST">{%csrf_token%}
 
-        {{form.as_p}}
-        <button type="submit">Registrar</button>
-    </form>
+{% block content %}
 
-</body>
+{% include 'includes/header.html' %}
 
-</html>
+<div class="grid-container">
+    <div class="grid-x">
+        <h1 class="cell">Ingrese los datos</h1>
+        <div class="cell">
+            <form method="POST" enctype="multipart/form-data" class="grid-x grid-margin-x">{%csrf_token%}
+
+                <div class="large-6 cell">
+                    <label>Nombres
+                        {{form.first_name}}
+                    </label>
+                </div>
+                <div class="large-6 cell">
+                    <label>Apellidos
+                        {{form.last_name}}
+                    </label>
+                </div>
+                <div class="large-6 cell">
+                    <label>Trabajo
+                        {{form.job}}
+                    </label>
+                </div>
+                <div class="large-6 cell">
+                    <label>Departamento
+                        {{form.departamento}}
+                    </label>
+                </div>
+                <div class="large-6 cell">
+                    <label>Habilidades
+                        {{form.habilidades}}
+                    </label>
+                </div>
+                <div class="large-6 cell">
+                    <label>Foto
+                        {{form.picture}}
+                    </label>
+                </div>
+                <div class="cell">
+                    <button type="submit" class="success button">Agregar empleado</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

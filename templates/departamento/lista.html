@@ -1,0 +1,45 @@
+{% extends 'base.html' %} <!--!Esto siempre tiene que ser lo primero que se agregue en el html nuevo-->
+<!--!No confundit el nombre del block con el contenido del mismo xd-->
+{% block title %}
+Lista de Departamentos
+{% endblock title %}
+
+
+{% block content %}
+{% include 'includes/header.html' %}
+
+<div class="grid-container">
+    <div class="grid-x">
+        <h1 class="cell">Lista de Departamentos</h1>
+        <div class="cell">
+            <table>
+                <thead>
+                    <tr>
+                        <th width="200">Nombre</th>
+                        <th width="200"> Código</th>
+                        <th width="200">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for departamento in departamentos %}
+                    <tr>
+                        <td>{{departamento.name}}</td>
+                        <td>{{departamento.shor_name}}</td>
+                        <td><a class="button warning"
+                                href="{% url 'persona_app:empleados_area' departamento.shor_name%}">Ver Empleados</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+<!-- -->

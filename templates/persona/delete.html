@@ -1,19 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+{% block title %}
+Eliminar empleado
+{% endblock title %}
 
-<body>
-    <h1>Eliminar Empleado</h1>
-    <form method="POST">{%csrf_token%}
-        <p>Desea eliminar??????????</p>
-        <button type="submit">Cofirmar</button>
+{% block content %}
+{% include 'includes/header.html' %}
 
-    </form>
-</body>
+<div class="grid-container">
+    <div class="grid-x" style="margin-top: 30px;">
+        <h1 class="cell" style=" text-align: center;">¿Eliminar Empleado {{object.full_name}}?</h1>
+        <form class="cell" method="POST">{%csrf_token%}
 
-</html>
+            <div class="callout alert" style="margin-top: 30px;">
+                <h5>¿Está seguro?</h5>
+                <p>Se perderá todo registro y relación del empleado en la base de datos.</p>
+                <button type="submit" class="alert button">Confirmar</button>
+            </div>
+
+
+
+        </form>
+    </div>
+</div>
+
+
+
+{% endblock content %}

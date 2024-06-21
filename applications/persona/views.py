@@ -6,7 +6,7 @@ from django.views.generic import (
     CreateView,
     TemplateView,
     UpdateView,
-    DeleteView
+    DeleteView,
 )
 from .models import Empleado
 
@@ -14,9 +14,26 @@ from .models import Empleado
 # Create your views here.
 
 
+class InicioView(TemplateView):
+    template_name = "inicio.html"
+
+
 # Mostrar todos los empleados
 class ListAllEmpleados(ListView):
     template_name = "persona/list_all.html"
+    paginate_by = 4
+
+    def get_queryset(self):
+        palabra_clave = self.request.GET.get("keyword", "")
+        lista = Empleado.objects.filter(full_name__icontains=palabra_clave)
+
+        return lista
+
+
+class ListEmpleadosAdmin(ListView):
+    template_name = "persona/list_empleados.html"
+    paginate_by = 10
+    ordering = "id"
     model = Empleado
 
 
@@ -80,8 +97,15 @@ class SuccessView(TemplateView):
 class EmpleadoCreateView(CreateView):
     template_name = "persona/add.html"
     model = Empleado
-    fields = ["first_name", "last_name", "job", "departamento", "habilidades"]
-    success_url = reverse_lazy("persona_app:correcto")
+    fields = [
+        "first_name",
+        "last_name",
+        "job",
+        "departamento",
+        "habilidades",
+        "picture",
+    ]
+    success_url = reverse_lazy("persona_app:empleados_admin")
 
     # Cuando el formulario es correcto, se ejecuta esto
     def form_valid(self, form: BaseModelForm):
@@ -102,16 +126,18 @@ class EmpleadoCreateView(CreateView):
 
 # UpdateView
 
+
 class EmpleadoUpdateView(UpdateView):
     template_name = "persona/update.html"
     model = Empleado
     fields = ["first_name", "last_name", "job", "departamento", "habilidades"]
-    success_url = reverse_lazy("persona_app:correcto")
+    success_url = reverse_lazy("persona_app:empleados_admin")
 
 
-#DeleteView
+# DeleteView
+
 
 class EmpleadoDeleteView(DeleteView):
-    template_name = 'persona/delete.html'
+    template_name = "persona/delete.html"
     model = Empleado
-    success_url = reverse_lazy("persona_app:correcto")
+    success_url = reverse_lazy("persona_app:empleados_admin")

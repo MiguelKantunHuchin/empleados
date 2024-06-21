@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Añadir Empleados
+{% endblock title %}
+
+
+{% block content %}
+
+{% include 'includes/header.html' %}
+
+<div class="grid-container">
+    <div class="grid-x">
+        <h1 class="cell">Registrar Departamento</h1>
+            <form method="POST" enctype="multipart/form-data" class="cell grid-x grid-margin-x">{%csrf_token%}
+                <div class="cell large-6 grid-x">
+                    <h3 class="cell">Empleado</h3>
+                    <div class="cell">
+                        <label>Nombres
+                            {{form.nombre}}
+                        </label>
+                    </div>
+                    <div class=" cell">
+                        <label>Apellidos
+                            {{form.apellidos}}
+                        </label>
+                    </div>
+                </div>
+
+                <div class="cell large-6 grid-x">
+                    <h3 class="cell">Departamento</h3>
+                    <div class=" cell">
+                        <label>Nombre del Departamento
+                            {{form.departamento}}
+                        </label>
+                    </div>
+                    <div class="cell">
+                        <label>Código Departamento
+                            {{form.shorname}}
+                        </label>
+                    </div>
+                </div>
+
+
+                <div class="cell">
+                    <button type="submit" class="success button""">Agregar</button>
+                </div>
+            </form>
+    </div>
+</div>
+
+{% endblock content %}
+
+
+
+
+
+<!DOCTYPE html>
+<html lang=" en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Nuevo Departamento </h1>
+    <form method="post">{%csrf_token%}
+        <h3>Datos Empleado</h3>
+        <p>
+            {{form.nombre}}
+
+        </p>
+        <p>
+            {{form.apellidos}}
+        </p>
+        <h3>Datos Departamento</h3>
+        <p>
+            {{form.departamento}}
+
+        </p>
+        <p>
+            {{form.shorname}}
+        </p>
+        <button type="submit">Guardar</button>
+    </form>
+</body>
+
+</html>

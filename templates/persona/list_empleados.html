@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 
+
 {% block title %}
-    Lista de Empleados
+    Administrar Empleados
 {% endblock title %}
+    
 
 {% block content %}
 {% include 'includes/header.html' %}
@@ -11,14 +13,6 @@
 
     <div class="grid-x">
         <h1 class="cell">Lista de empleados</h1>
-        <form class="cell grid-x grid-margin-x" method="get">{%csrf_token%}
-            <div class="cell large-7">
-                <input type="text" placeholder='Buscar empleado' id="keyword" name="keyword">
-            </div>
-            <div class="cell large-2">
-                <button class="submit success button" type="submit">Buscar</button>
-            </div>
-        </form>
         <div class="cell">
             <table>
                 <thead>
@@ -37,7 +31,9 @@
                         <td>{{e.last_name}}</td>
                         <td>{{e.first_name}}</td>
                         <td>{{e.departamento.shor_name}}</td>
-                        <td> <a class="button warning" href="{% url 'persona_app:detalles' e.pk %}">Ver</a></td>
+                        <td> <a class="button success" href="{% url 'persona_app:actualizar' e.pk %}">Editar</a>
+                            <a class="button alert" href="{% url 'persona_app:eliminar' e.pk %}">Eliminar</a>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
